@@ -810,6 +810,10 @@ video {
   aspect-ratio: 6.8/1;
 }
 
+.aspect-\[16\/10\] {
+  aspect-ratio: 16/10;
+}
+
 .h-full {
   height: 100%;
 }
@@ -1278,6 +1282,11 @@ video {
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .object-left {
