@@ -766,6 +766,235 @@
       </div>
     </section>
     <!-- USER REVIEWS SECTION END -->
+    <!-- TESTIMONIALS SECTION START -->
+    <section class="w-full overflow-hidden">
+      <div
+        class="container max-w-[120rem] px-8 md:px-12 lg:px-24 mx-auto text-[#494b7a] hidden lg:block overflow-hidden py-8 lg:py-32 bg-white"
+        x-data="{
+            init(){
+              this.changeOpacity();
+            },
+            currentSlide: 0,
+            numberOfItems: $refs.testimonialContainer.children.length,
+            numberOfSlides: Math.ceil($refs.testimonialContainer.children.length) - 2,
+            pagContainer: $refs.pagination.children,
+            paginationClass: function () {
+              Array.from($refs.pagination.children).forEach(el => {
+                      el.classList.remove('w-16');
+                      el.classList.add('w-8');
+                      if (el.id.substr(2) === $refs.testimonialContainer.dataset.id) {
+                        el.classList.add('w-16');
+                        el.classList.remove('w-8');
+                      }
+                });
+            },
+            moveSlideRight(){
+              this.currentSlide++
+              $refs.testimonialContainer.dataset.id = this.currentSlide ;
+              if(this.currentSlide >= this.numberOfSlides + 1) this.currentSlide = this.numberOfSlides;
+              $refs.testimonialContainer.style.transform = `translateX(-${((this.currentSlide) * 40) - 10.5}%)`
+              this.paginationClass()
+            },
+            moveSlideLeft(){
+              this.currentSlide--
+              $refs.testimonialContainer.dataset.id = this.currentSlide ;
+              if(this.currentSlide <= 0){
+                this.currentSlide = 0;
+                $refs.testimonialContainer.style.transform = `translateX(${10.5}%)`
+              }else{
+                $refs.testimonialContainer.style.transform = `translateX(-${((this.currentSlide) * 40) - 10.5}%)`
+              }
+              this.paginationClass()
+            },
+            changeOpacity(){
+              Array.from($refs.testimonialContainer.children).forEach(item => {
+                item.classList.add('opacity-10')
+              })
+              $refs.testimonialContainer.children[this.currentSlide].classList.remove('opacity-10')
+              $refs.testimonialContainer.children[this.currentSlide + 1].classList.remove('opacity-10')
+            },
+          }">
+        <!-- SLIDER CONTAINER -->
+        <div class="relative h-full">
+          <!-- BUTTON LEFT -->
+          <button @click="
+              moveSlideLeft();
+              changeOpacity();
+            "
+            class="absolute p-3 h-12 w-12 rounded-full bg-[#372580] bg-opacity-90 text-white z-10 left-3 lg:left-[7%] top-1/2"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" aria-hidden="true" data-testid="dynamic-hero-icon"
+              class="w-6 h-6 right-px relative">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <!-- BUTTON RIGHT -->
+          <button @click="
+              moveSlideRight();
+              changeOpacity();
+            "
+            class="absolute p-3 h-12 w-12 rounded-full bg-[#372580] bg-opacity-90 text-white z-10 right-3 lg:right-[7%] top-1/2"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" aria-hidden="true" data-testid="dynamic-hero-icon" class="w-6 h-6 left-px relative">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+          <!-- SLIDER -->
+          <div class="flex flex-nowrap translate-x-[10.5%] transition-all duration-500" x-ref="testimonialContainer"
+            data-id="1">
+            <!-- SLIDE -->
+            <div class="transition-all duration-500 inline-block shrink-0 w-[calc(40%_-_2%)] mr-[2%]">
+              <figure
+                class="w-full h-full relative flex-col place-content-between justify-center p-8 lg:p-16 rounded-3xl shadow-sm lg:shadow-lg text-white duration-300 flex slide-gradient bg-gradient-to-b from-[#6d4aff] to-[#372580] opacity-100 before:bg-[url('../images/slider-quote.svg')] before:bg-no-repeat before:bg-[left_1.75rem_top] before:bg-[16rem] before:absolute before:inset-0">
+                <blockquote class="text-2xl h-full relative">
+                  We use Proton Mail for our medical imaging practice. Migration from our
+                  self-hosted servers was seamless, and our team loves the simplicity of sending patient reports to and
+                  from our
+                  partners.
+                </blockquote>
+                <div class="mt-12 flex items-center">
+                  <!-- IMAGE -->
+                  <div class=" h-16 w-16 lg:h-24 lg:w-24 shrink-0  rounded-full relative z-0 bg-white overflow-hidden">
+                    <img src="images/slide-img01.webp" alt="Slide Thumbnail" class="object-contain w-full h-full">
+                  </div>
+                  <figcaption class="text-lg ml-6">Michael Maynes, Partner<br>Proton Mail customer since 2020
+                  </figcaption>
+                </div>
+              </figure>
+            </div>
+            <!-- SLIDE -->
+            <div class="transition-all duration-500 inline-block shrink-0 w-[calc(40%_-_2%)] mr-[2%]">
+              <figure
+                class="w-full h-full relative flex-col place-content-between justify-center p-8 lg:p-16 rounded-3xl shadow-sm lg:shadow-lg text-white duration-300 flex slide-gradient bg-gradient-to-b from-[#6d4aff] to-[#372580] opacity-100 before:bg-[url('../images/slider-quote.svg')] before:bg-no-repeat before:bg-[left_1.75rem_top] before:bg-[16rem] before:absolute before:inset-0">
+                <blockquote class="text-2xl h-full relative">
+                  We use Proton Mail for our medical imaging practice. Migration from our
+                  self-hosted servers was seamless, and our team loves the simplicity of sending patient reports to and
+                  from our
+                  partners.
+                </blockquote>
+                <div class="mt-12 flex items-center">
+                  <!-- IMAGE -->
+                  <div class=" h-16 w-16 lg:h-24 lg:w-24 shrink-0  rounded-full relative z-0 bg-white overflow-hidden">
+                    <img src="images/slide-img01.webp" alt="Slide Thumbnail" class="object-contain w-full h-full">
+                  </div>
+                  <figcaption class="text-lg ml-6">Michael Maynes, Partner<br>Proton Mail customer since 2020
+                  </figcaption>
+                </div>
+              </figure>
+            </div>
+            <!-- SLIDE -->
+            <div class="transition-all duration-500 inline-block shrink-0 w-[calc(40%_-_2%)] mr-[2%]">
+              <figure
+                class="w-full h-full relative flex-col place-content-between justify-center p-8 lg:p-16 rounded-3xl shadow-sm lg:shadow-lg text-white duration-300 flex slide-gradient bg-gradient-to-b from-[#6d4aff] to-[#372580] opacity-100 before:bg-[url('../images/slider-quote.svg')] before:bg-no-repeat before:bg-[left_1.75rem_top] before:bg-[16rem] before:absolute before:inset-0">
+                <blockquote class="text-2xl h-full relative">
+                  We use Proton Mail for our medical imaging practice. Migration from our
+                  self-hosted servers was seamless, and our team loves the simplicity of sending patient reports to and
+                  from our
+                  partners.
+                </blockquote>
+                <div class="mt-12 flex items-center">
+                  <!-- IMAGE -->
+                  <div class=" h-16 w-16 lg:h-24 lg:w-24 shrink-0  rounded-full relative z-0 bg-white overflow-hidden">
+                    <img src="images/slide-img01.webp" alt="Slide Thumbnail" class="object-contain w-full h-full">
+                  </div>
+                  <figcaption class="text-lg ml-6">Michael Maynes, Partner<br>Proton Mail customer since 2020
+                  </figcaption>
+                </div>
+              </figure>
+            </div>
+            <!-- SLIDE -->
+            <div class="transition-all duration-500 inline-block shrink-0 w-[calc(40%_-_2%)] mr-[2%]">
+              <figure
+                class="w-full h-full relative flex-col place-content-between justify-center p-8 lg:p-16 rounded-3xl shadow-sm lg:shadow-lg text-white duration-300 flex slide-gradient bg-gradient-to-b from-[#6d4aff] to-[#372580] opacity-100 before:bg-[url('../images/slider-quote.svg')] before:bg-no-repeat before:bg-[left_1.75rem_top] before:bg-[16rem] before:absolute before:inset-0">
+                <blockquote class="text-2xl h-full relative">
+                  We use Proton Mail for our medical imaging practice. Migration from our
+                  self-hosted servers was seamless, and our team loves the simplicity of sending patient reports to and
+                  from our
+                  partners.
+                </blockquote>
+                <div class="mt-12 flex items-center">
+                  <!-- IMAGE -->
+                  <div class=" h-16 w-16 lg:h-24 lg:w-24 shrink-0  rounded-full relative z-0 bg-white overflow-hidden">
+                    <img src="images/slide-img01.webp" alt="Slide Thumbnail" class="object-contain w-full h-full">
+                  </div>
+                  <figcaption class="text-lg ml-6">Michael Maynes, Partner<br>Proton Mail customer since 2020
+                  </figcaption>
+                </div>
+              </figure>
+            </div>
+            <!-- SLIDE -->
+            <div class="transition-all duration-500 inline-block shrink-0 w-[calc(40%_-_2%)] mr-[2%]">
+              <figure
+                class="w-full h-full relative flex-col place-content-between justify-center p-8 lg:p-16 rounded-3xl shadow-sm lg:shadow-lg text-white duration-300 flex slide-gradient bg-gradient-to-b from-[#6d4aff] to-[#372580] opacity-100 before:bg-[url('../images/slider-quote.svg')] before:bg-no-repeat before:bg-[left_1.75rem_top] before:bg-[16rem] before:absolute before:inset-0">
+                <blockquote class="text-2xl h-full relative">
+                  We use Proton Mail for our medical imaging practice. Migration from our
+                  self-hosted servers was seamless, and our team loves the simplicity of sending patient reports to and
+                  from our
+                  partners.
+                </blockquote>
+                <div class="mt-12 flex items-center">
+                  <!-- IMAGE -->
+                  <div class=" h-16 w-16 lg:h-24 lg:w-24 shrink-0  rounded-full relative z-0 bg-white overflow-hidden">
+                    <img src="images/slide-img01.webp" alt="Slide Thumbnail" class="object-contain w-full h-full">
+                  </div>
+                  <figcaption class="text-lg ml-6">Michael Maynes, Partner<br>Proton Mail customer since 2020
+                  </figcaption>
+                </div>
+              </figure>
+            </div>
+            <!-- SLIDE -->
+            <div class="transition-all duration-500 inline-block shrink-0 w-[calc(40%_-_2%)] mr-[2%]">
+              <figure
+                class="w-full h-full relative flex-col place-content-between justify-center p-8 lg:p-16 rounded-3xl shadow-sm lg:shadow-lg text-white duration-300 flex slide-gradient bg-gradient-to-b from-[#6d4aff] to-[#372580] opacity-100 before:bg-[url('../images/slider-quote.svg')] before:bg-no-repeat before:bg-[left_1.75rem_top] before:bg-[16rem] before:absolute before:inset-0">
+                <blockquote class="text-2xl h-full relative">
+                  We use Proton Mail for our medical imaging practice. Migration from our
+                  self-hosted servers was seamless, and our team loves the simplicity of sending patient reports to and
+                  from our
+                  partners.
+                </blockquote>
+                <div class="mt-12 flex items-center">
+                  <!-- IMAGE -->
+                  <div class=" h-16 w-16 lg:h-24 lg:w-24 shrink-0  rounded-full relative z-0 bg-white overflow-hidden">
+                    <img src="images/slide-img01.webp" alt="Slide Thumbnail" class="object-contain w-full h-full">
+                  </div>
+                  <figcaption class="text-lg ml-6">Michael Maynes, Partner<br>Proton Mail customer since 2020
+                  </figcaption>
+                </div>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <!-- SLIDER NAVIGATION -->
+        <ul class="sticky align-center justify-center flex flex-nowrap w-full space-x-2 lg:mt-16 left-0"
+          x-ref="pagination">
+          <template x-for="i in (numberOfSlides + 1)">
+            <li
+              class="h-1 rounded-full bg-purple-100 inline-block w-8 hover:ring-4 hover:ring-purple-50 hover:bg-purple-300"
+              :id="$id('a')" @click="
+                    if(+$el.id.substr(2) === 1){
+                      $refs.testimonialContainer.style.transform = `translateX(${10.5}%)`
+                      $refs.testimonialContainer.dataset.id = 1;
+                      
+                    }else{
+
+                      $refs.testimonialContainer.style.transform = `translateX(-${(Array.from($el.parentElement.children).indexOf($el) - 1) * 40 - 10.5}%)`
+                      $refs.testimonialContainer.dataset.id = +$el.id.substr(2);
+                    }
+                    currentSlide = $refs.testimonialContainer.dataset.id - 1;
+                    Array.from($el.parentElement.children).forEach(el => {
+                      el.classList.remove('w-16');
+                      el.classList.add('w-8');
+                    })
+                    $el.classList.remove('w-8');
+                    $el.classList.add('w-16');
+                  "></li>
+          </template>
+        </ul>
+      </div>
+    </section>
+    <!-- TESTIMONIALS SECTION END -->
     <!-- GET PROTON SECTION START -->
     <section class="bg-white">
       <div class="container max-w-[120rem] mx-auto text-[#494b7a] py-6 lg:py-20 px-0 lg:px-12 xl:px-24">
