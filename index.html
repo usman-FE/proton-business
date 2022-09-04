@@ -1018,6 +1018,10 @@
                           });
                   },
                   currentSlide: 0,
+                  touchstartX: 0,
+                  touchstartY: 0,
+                  touchendX: 0,
+                  touchendY: 0,
                   numberOfItems: $refs.testimonialContainerSm.children.length,
                   numberOfSlides: Math.ceil($refs.testimonialContainerSm.children.length) - 1,
                   pagContainer: $refs.paginationSm.children,
@@ -1025,7 +1029,6 @@
                     Array.from($refs.paginationSm.children).forEach(el => {
                             el.classList.remove('w-16', 'bg-[#6d4aff]');
                             el.classList.add('w-8', 'bg-[#e2dbff]');
-                            console.log(el.id.substr(2))
                             if (el.id.substr(2) === $refs.testimonialContainerSm.dataset.id) {
                               el.classList.add('w-16', 'bg-[#6d4aff]');
                               el.classList.remove('w-8', 'bg-[#e2dbff]');
@@ -1060,9 +1063,33 @@
                     })
                     $refs.testimonialContainerSm.children[this.currentSlide].classList.remove('opacity-10')
                   },
+                  handleGesture: function(){
+                  if (this.touchendX < this.touchstartX + 27) { 
+                    this.moveSlideRightSm();
+                    this.changeOpacitySm();
+                  } 
+                  if(this.touchendX + 27 > this.touchstartX) {
+                    this.moveSlideLeftSm();
+                    this.changeOpacitySm();
+                  }
+                  }
                 }">
         <!-- SLIDER CONTAINER -->
-        <div class="relative h-full">
+        <div class="relative h-full" @mousedown.passive="
+              touchstartY = $event.screenY;
+              touchstartX = $event.screenX;
+            " @touchstart.passive="
+              touchstartX = $event.changedTouches[0].screenX;
+              touchstartY = $event.changedTouches[0].screenY;
+            " @mouseup.passive="
+              touchendX = $event.screenX;
+              touchendY = $event.screenY;
+              handleGesture();
+            " @touchend.passive="
+              touchendX = $event.changedTouches[0].screenX;
+              touchendY = $event.changedTouches[0].screenY;
+              handleGesture();
+            ">
           <!-- BUTTON LEFT -->
           <button @click="
                     moveSlideLeftSm();
