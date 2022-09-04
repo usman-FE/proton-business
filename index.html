@@ -1064,11 +1064,11 @@
                     $refs.testimonialContainerSm.children[this.currentSlide].classList.remove('opacity-10')
                   },
                   handleGesture: function(){
-                  if (this.touchendX < this.touchstartX + 27) { 
+                  if (this.touchendX + 21 < this.touchstartX) { 
                     this.moveSlideRightSm();
                     this.changeOpacitySm();
                   } 
-                  if(this.touchendX + 27 > this.touchstartX) {
+                  if(this.touchendX > this.touchstartX + 21) {
                     this.moveSlideLeftSm();
                     this.changeOpacitySm();
                   }
